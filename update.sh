@@ -3,7 +3,7 @@
 VERDE="\033[0;32m"
 RESET="\033[0m"
 
-# Verificamos si se pasó el hostname como argumento
+# Tomar el hostname del primer argumento
 nuevo_hostname="$1"
 
 if [ -z "$nuevo_hostname" ]; then
@@ -12,11 +12,9 @@ if [ -z "$nuevo_hostname" ]; then
     exit 1
 fi
 
-# Actualizar sistema
 echo -e "${VERDE}🔄 Actualizando el sistema...${RESET}"
 sudo apt update && sudo apt upgrade -y
 
-# Cambiar hostname
 echo -e "${VERDE}✅ Cambiando hostname a: $nuevo_hostname${RESET}"
 echo "$nuevo_hostname" | sudo tee /etc/hostname
 sudo hostnamectl set-hostname "$nuevo_hostname"
